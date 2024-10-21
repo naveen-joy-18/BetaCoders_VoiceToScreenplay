@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Voice to Screenplay Generator</title>
+  <style>
+    /* Basic Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-image: url('bg.jpg'); /* Ensure this path is correct */
+      background-size: cover; /* Cover the entire body */
+      background-repeat: no-repeat; /* Prevent repeating */
+      background-position: center; /* Center the image */
+      background-color: #f5f5f5; /* Fallback background color */
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      position: relative; /* Enable positioning for the buttons */
+    }
+
+    .menu {
+      position: fixed;
+      left: -250px; /* Hide menu initially */
+      top: 0;
+      height: 100%;
+      width: 250px;
+      background-color: #333; /* Keep the background dark */
+      color: white; /* Keep text color white */
+      padding: 20px;
+      transition: left 0.3s ease;
+      z-index: 1;
+    }
+
+    .menu a {
+      display: block;
+      color: white; /* Ensure text color is white */
+      text-decoration: none;
+      margin: 15px 0; /* Space between menu items */
+      padding: 10px; /* Add padding for a better click area */
+      transition: background-color 0.3s; /* Transition effect for hover */
+    }
+
+    .menu a:hover {
+      background-color: rgba(255, 255, 255, 0.2); /* Light background on hover */
+    }
+
+    .menu.active {
+      left: 0; /* Slide in menu */
+    }
+
+    .content {
+      text-align: center;
+      max-width: 600px;
+      margin-top: 150px;
+      background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent background for content */
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .content h1 {
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+
+    .content p {
+      font-size: 16px;
+      color: #666;
+      margin-bottom: 40px;
+    }
+
+    .auth-btn {
+      padding: 10px 20px;
+      border: 2px solid #333; /* Dark border */
+      border-radius: 5px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      margin-left: 10px; /* Space between buttons */
+    }
+
+    .auth-btn.sign-in {
+      background-color: #333; /* Dark background for Sign In */
+      color: white; /* White text for Sign In */
+    }
+
+    .auth-btn.sign-up {
+      background-color: #ffffff; /* White background for Sign Up */
+      color: #333; /* Dark text for Sign Up */
+    }
+
+    .auth-btn.sign-in:hover {
+      background-color: white; /* White background on hover */
+      color: #333; /* Dark text on hover */
+    }
+
+    .auth-btn.sign-up:hover {
+      background-color: #333; /* Dark background on hover */
+      color: white; /* White text on hover */
+    }
+
+    .proceed-btn {
+      padding: 15px 30px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      margin-top: 20px; /* Margin for spacing */
+    }
+
+    .proceed-btn:hover {
+      background-color: #45a049; /* Darker green on hover */
+      transform: scale(1.05); /* Slightly enlarge on hover */
+    }
+
+    .proceed-btn:active {
+      background-color: #388E3C; /* Darker shade on click */
+      transform: scale(0.95); /* Slightly shrink on click */
+    }
+
+    .menu-icon {
+      cursor: pointer;
+      font-size: 24px;
+      position: absolute; /* Position the icon absolutely */
+      top: 20px; /* Top position */
+      left: 20px; /* Left position */
+      z-index: 2; /* Ensure icon is above the background */
+      color: white; /* Change the icon color to white */
+    }
+
+    .auth-buttons-container {
+      position: absolute; /* Position buttons absolutely */
+      top: 20px; /* Top position */
+      right: 20px; /* Right position */
+      display: flex; /* Use flex to align buttons */
+      z-index: 2; /* Ensure buttons are above the background */
+    }
+
+    @media (max-width: 768px) {
+      .menu {
+        width: 200px;
+      }
+
+      .content h1 {
+        font-size: 24px;
+      }
+
+      .content p {
+        font-size: 14px;
+      }
+
+      .auth-btn {
+        padding: 8px 16px;
+      }
+
+      .proceed-btn {
+        padding: 10px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="menu" id="menu">
+    <a href=""></a>
+    <a href="home.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="features.html">Features</a>
+    <a href="contact.html">Contact</a>
+  </div>
+
+  <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
+
+  <div class="auth-buttons-container">
+    <button class="auth-btn sign-in" onclick="window.location.href='sign-in.html'">Sign In</button>
+    <button class="auth-btn sign-up" onclick="window.location.href='sign-up.html'">Sign Up</button>
+  </div>
+
+  <div class="content">
+    <h1>Voice to Screenplay Generator</h1>
+    <p>Turn your spoken words into a structured screenplay with ease. Use voice commands to narrate your scenes, and our tool will format them into a professional screenplay format.</p>
+    
+    <button class="proceed-btn" onclick="window.location.href='abc.html'">Proceed for Recording</button>
+  </div>
+
+  <script>
+    function toggleMenu() {
+      var menu = document.getElementById('menu');
+      menu.classList.toggle('active');
+    }
+
+    // Close the menu if the user clicks outside of it
+    document.addEventListener('click', function(event) {
+      var menu = document.getElementById('menu');
+      var menuIcon = document.querySelector('.menu-icon');
+
+      // Check if the click was outside the menu and menu icon
+      if (!menu.contains(event.target) && !menuIcon.contains(event.target)) {
+        menu.classList.remove('active');
+      }
+    });
+  </script>
+</body>
+</html>
